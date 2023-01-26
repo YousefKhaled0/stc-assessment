@@ -79,7 +79,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create folder
 
 ```http
-  Post /space/{name}/folder
+  Post /space/{spaceName}/folder
 ```
 ### Sample request
 ```json
@@ -128,3 +128,52 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 2- User header must be supplied with a user email with edit access. 
 
 3- No two folders in the same space can have the same name.
+
+### Upload file
+
+```http
+  Post /space/{spaceName}/folder/{folderName}/file
+```
+
+### Sample request
+
+Request is multipart form with file as key.
+
+### Sample response
+```json
+{
+    "id": "8e14fb8b-c6af-4bae-b16b-9b6024c997cd",
+    "name": "Squirrel-UpdateSelf.log",
+    "type": "FILE",
+    "parent": {
+        "id": "91de6656-484d-41a0-8309-90c894c1cde8",
+        "name": "aaaaaaaaaaaaa",
+        "type": "FOLDER",
+        "parent": {
+            "id": "b559c651-bc5d-42a4-ab44-6dcab414ad34",
+            "name": "stc-assessments",
+            "type": "SPACE",
+            "group": {
+                "id": "5505291d-5a78-47a6-8bcd-a0d465d4d9d8",
+                "groupName": "admins",
+                "users": [
+                    {
+                        "id": "9f823e3c-5c82-46cf-8ece-0c00ae23d560",
+                        "email": "edit@stc.com",
+                        "permission": "EDIT"
+                    },
+                    {
+                        "id": "aeaea104-69b5-495b-8672-d2d1d35f4a73",
+                        "email": "view@stc.com",
+                        "permission": "VIEW"
+                    }
+                ]
+            }
+       }
+    }
+}
+```
+
+| Header | Type     | Description                       | example
+| :-------- | :------- | :-------------------------------- | :--------------
+| `user`      | `string` | **Required**. user email for auth | edit@stc.com |
