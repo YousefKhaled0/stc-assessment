@@ -84,7 +84,17 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final ItemEntity folderEntity = getItem(spaceName, ItemType.FOLDER, spaceEntity);
 
-        return null;
+        final ItemEntity fileMetaData = itemMapper.toFileEntity(fileItem, folderEntity);
+
+        checkItemAlreadyExists(fileItem.getName(), ItemType.FILE, folderEntity);
+
+        final ItemEntity savedFileMetaData = itemRepository.save(fileMetaData);
+
+        final Item space = itemMapper.fromSpaceEntity(spaceEntity, permissionGroup);
+
+        final Item folder = itemMapper.fromFolderEntity(folderEntity, space);
+
+        return itemMapper.fromFileEntity(savedFileMetaData, folder);
     }
 
     private void checkItemAlreadyExists(final String name, final ItemType type, final ItemEntity parent) {

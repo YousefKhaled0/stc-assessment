@@ -1,5 +1,6 @@
 package com.stc.mapper;
 
+import com.stc.dom.FileItem;
 import com.stc.dom.FolderItem;
 import com.stc.dom.Item;
 import com.stc.dom.PermissionGroup;
@@ -35,4 +36,19 @@ public interface ItemMapper {
     @Mapping(target = "type", expression = "java(ItemType.FOLDER)")
     @Mapping(target = "parent", expression = "java(parent)")
     Item fromFolderEntity(ItemEntity itemEntity, Item parent);
+
+    @Mapping(target = "id", expression = "java(null)")
+    @Mapping(target = "group", expression = "java(parent.getGroup())")
+    @Mapping(target = "type", expression = "java(ItemType.FILE.name())")
+    @Mapping(target = "name", expression = "java(item.getName())")
+    @Mapping(target = "parent", expression = "java(parent)")
+    @Mapping(target = "items", expression = "java(null)")
+    ItemEntity toFileEntity(FileItem item, ItemEntity parent);
+
+    @Mapping(target = "id", expression = "java(itemEntity.getId())")
+    @Mapping(target = "name", expression = "java(itemEntity.getName())")
+    @Mapping(target = "group", expression = "java(null)")
+    @Mapping(target = "type", expression = "java(ItemType.FILE)")
+    @Mapping(target = "parent", expression = "java(parent)")
+    Item fromFileEntity(ItemEntity itemEntity, Item parent);
 }
