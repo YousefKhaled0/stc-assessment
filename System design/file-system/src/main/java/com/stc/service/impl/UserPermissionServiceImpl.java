@@ -27,14 +27,14 @@ public class UserPermissionServiceImpl implements UserPermissionService {
     private final UserPermissionMapper userPermissionMapper;
 
     @Override
-    public UserPermission addUserToGroup(final PermissionGroup group, final UserPermission userPermission) {
+    public UserPermission addUserToGroup(final PermissionGroup permissionGroup, final UserPermission userPermission) {
 
-        final PermissionGroupEntity permissionGroup = permissionGroupRepository.findById(group.getId())
+        final PermissionGroupEntity permissionGroupEntity = permissionGroupRepository.findById(permissionGroup.getId())
                 .orElseThrow(PermissionGroupNotFoundException::new);
 
         final String email = userPermission.getEmail();
 
-        final Optional<UserPermissionEntity> userPermissionOptional = userPermissionRepository.findByEmailAndPermissionGroup(email, permissionGroup);
+        final Optional<UserPermissionEntity> userPermissionOptional = userPermissionRepository.findByEmailAndPermissionGroup(email, permissionGroupEntity);
 
         if (userPermissionOptional.isPresent()) {
 
@@ -43,7 +43,7 @@ public class UserPermissionServiceImpl implements UserPermissionService {
             return userPermissionMapper.fromEntity(userPermissionEntity);
         }
 
-        final UserPermissionEntity userPermissionEntity = userPermissionMapper.toEntity(userPermission, permissionGroup);
+        final UserPermissionEntity userPermissionEntity = userPermissionMapper.toEntity(userPermission, permissionGroupEntity);
 
         final UserPermissionEntity savedUserPermissionEntity = userPermissionRepository.save(userPermissionEntity);
 
@@ -51,7 +51,10 @@ public class UserPermissionServiceImpl implements UserPermissionService {
     }
 
     @Override
-    public List<UserPermission> getUsersFromGroup(PermissionGroupEntity permissionGroupEntity) {
+    public List<UserPermission> getUsersFromGroup(PermissionGroup permissionGroup) {
+
+        final PermissionGroupEntity permissionGroupEntity = permissionGroupRepository.findById(permissionGroup.getId())
+                .orElseThrow(PermissionGroupNotFoundException::new);
 
         final List<UserPermissionEntity> userPermissionEntities = userPermissionRepository.findByPermissionGroup(permissionGroupEntity);
 

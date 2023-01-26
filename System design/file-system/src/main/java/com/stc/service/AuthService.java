@@ -1,10 +1,11 @@
 package com.stc.service;
 
 import com.stc.dom.PermissionGroup;
+import com.stc.entity.ItemEntity;
 
 public interface AuthService {
 
-    void authEditUser(String user, PermissionGroup permissionGroup);
+    PermissionGroup authEditUser(String user, ItemEntity space);
 
-    void authViewUser(String user, PermissionGroup permissionGroup);
+    PermissionGroup authViewUser(String user, ItemEntity space);
 }

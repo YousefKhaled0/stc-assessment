@@ -16,13 +16,10 @@ public class ControllerErrorAdvice {
     @ExceptionHandler(AuthException.class)
     public ResponseEntity<Object> handleAuthException(AuthException ex, WebRequest request) {
 
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
 
-    @ExceptionHandler({
-            FolderAlreadyExistsException.class,
-            SpaceAlreadyExistsException.class
-    })
+    @ExceptionHandler({ItemAlreadyExistsException.class})
     public ResponseEntity<Object> handleBadRequest(Exception ex, WebRequest request) {
 
 
@@ -33,7 +30,7 @@ public class ControllerErrorAdvice {
     }
 
     @ExceptionHandler({
-            SpaceNotFoundException.class,
+            ItemNotFoundException.class,
             PermissionGroupNotFoundException.class
     })
     public ResponseEntity<Object> handleNotFound(Exception ex, WebRequest request) {

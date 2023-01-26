@@ -10,5 +10,5 @@ public interface UserPermissionService {
 
     UserPermission addUserToGroup(PermissionGroup groupId, UserPermission userPermissions);
 
-    List<UserPermission> getUsersFromGroup(PermissionGroupEntity permissionGroupEntity);
+    List<UserPermission> getUsersFromGroup(PermissionGroup permissionGroup);
 }

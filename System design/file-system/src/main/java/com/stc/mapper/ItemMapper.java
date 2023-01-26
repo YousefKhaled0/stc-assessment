@@ -3,6 +3,7 @@ package com.stc.mapper;
 import com.stc.dom.FolderItem;
 import com.stc.dom.Item;
 import com.stc.dom.PermissionGroup;
+import com.stc.entity.FileEntity;
 import com.stc.entity.ItemEntity;
 import com.stc.entity.PermissionGroupEntity;
 import org.mapstruct.Mapper;
@@ -21,12 +22,12 @@ public interface ItemMapper {
     Item fromSpaceEntity(ItemEntity itemEntity, PermissionGroup permissionGroup);
 
     @Mapping(target = "id", expression = "java(null)")
-    @Mapping(target = "group", expression = "java(permissionGroupEntity)")
+    @Mapping(target = "group", expression = "java(parent.getGroup())")
     @Mapping(target = "type", expression = "java(ItemType.FOLDER.name())")
     @Mapping(target = "name", expression = "java(item.getName())")
     @Mapping(target = "parent", expression = "java(parent)")
     @Mapping(target = "items", expression = "java(null)")
-    ItemEntity toFolderEntity(FolderItem item, PermissionGroupEntity permissionGroupEntity, ItemEntity parent);
+    ItemEntity toFolderEntity(FolderItem item, ItemEntity parent);
 
     @Mapping(target = "id", expression = "java(itemEntity.getId())")
     @Mapping(target = "name", expression = "java(itemEntity.getName())")

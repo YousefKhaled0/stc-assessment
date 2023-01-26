@@ -1,7 +1,7 @@
 package com.stc.service.impl;
 
-import com.stc.advice.error.FolderAlreadyExistsException;
-import com.stc.advice.error.SpaceNotFoundException;
+import com.stc.advice.error.ItemAlreadyExistsException;
+import com.stc.advice.error.ItemNotFoundException;
 import com.stc.dom.*;
 import com.stc.entity.ItemEntity;
 import com.stc.entity.PermissionGroupEntity;
@@ -60,20 +60,13 @@ public class FileSystemServiceImpl implements FileSystemService {
     @Override
     public Item createNewFolder(FolderItem item, String spaceName, String user) {
 
-        final ItemEntity spaceEntity = getSpace(spaceName);
+        final ItemEntity spaceEntity = getItem(spaceName, ItemType.SPACE, null);
 
-        final PermissionGroupEntity permissionGroupEntity = spaceEntity.getGroup();
-
-        final List<UserPermission> usersFromGroup = userPermissionService.getUsersFromGroup(permissionGroupEntity);
-
-        final PermissionGroup permissionGroup = permissionGroupMapper.fromEntity(permissionGroupEntity);
-        permissionGroup.setUsers(usersFromGroup);
-
-        authService.authEditUser(user, permissionGroup);
+        final PermissionGroup permissionGroup = authService.authEditUser(user, spaceEntity);
 
         checkItemAlreadyExists(item.getName(), ItemType.FOLDER, spaceEntity);
 
-        final ItemEntity itemEntity = itemMapper.toFolderEntity(item, permissionGroupEntity, spaceEntity);
+        final ItemEntity itemEntity = itemMapper.toFolderEntity(item, spaceEntity);
 
         final ItemEntity savedItemEntity = itemRepository.save(itemEntity);
 
@@ -83,30 +76,36 @@ public class FileSystemServiceImpl implements FileSystemService {
     }
 
     @Override
-    public Item createNewFile(FileItem fileItem, String spaceName, String folderName, String user) {
+    public Item createNewFile(final FileItem fileItem, final String spaceName, final String folderName, final String user) {
+
+        final ItemEntity spaceEntity = getItem(spaceName, ItemType.SPACE, null);
+
+        final PermissionGroup permissionGroup = authService.authEditUser(user, spaceEntity);
+
+        final ItemEntity folderEntity = getItem(spaceName, ItemType.FOLDER, spaceEntity);
 
         return null;
     }
 
     private void checkItemAlreadyExists(final String name, final ItemType type, final ItemEntity parent) {
 
-        Optional<ItemEntity> folderOptional = itemRepository.findByNameAndTypeAndParent(name, type.name(), parent);
+        final Optional<ItemEntity> folderOptional = itemRepository.findByNameAndTypeAndParent(name, type.name(), parent);
 
         if (folderOptional.isPresent()) {
 
-            throw new FolderAlreadyExistsException();
+            throw new ItemAlreadyExistsException();
         }
     }
 
-    private ItemEntity getSpace(final String spaceName) {
+    private ItemEntity getItem(final String name, final ItemType type, final ItemEntity parent) {
 
-        Optional<ItemEntity> spaceOptional = itemRepository.findByNameAndType(spaceName, ItemType.SPACE.name());
+        final Optional<ItemEntity> itemEntityOptional = itemRepository.findByNameAndTypeAndParent(name, type.name(), parent);
 
-        if (!spaceOptional.isPresent()) {
+        if (!itemEntityOptional.isPresent()) {
 
-            throw new SpaceNotFoundException();
+            throw new ItemNotFoundException();
         }
 
-        return spaceOptional.get();
+        return itemEntityOptional.get();
     }
 }

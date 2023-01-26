@@ -40,7 +40,7 @@ public class FileSystemController {
     ) throws IOException {
 
         final FileItem fileItem = FileItem.builder()
-                .name(file.getName())
+                .name(file.getOriginalFilename())
                 .content(file.getBytes()).build();
 
         return fileSystemService.createNewFile(fileItem, spaceName, folderName, user);
