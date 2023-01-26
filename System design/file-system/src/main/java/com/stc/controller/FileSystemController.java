@@ -23,16 +23,17 @@ public class FileSystemController {
         return fileSystemService.createNewSpace(item);
     }
 
-    @PostMapping("/space/{name}/folder")
+    @PostMapping("/space/{spaceName}/folder")
     public Item createNewSpace(@RequestBody @Valid final FolderItem folderItem,
-                               @PathVariable String name,
+                               @PathVariable String spaceName,
                                @RequestHeader(name = "user", required = false) String user
     ) {
 
-        return fileSystemService.createNewFolder(folderItem, name, user);
+        return fileSystemService.createNewFolder(folderItem, spaceName, user);
     }
 
-    @PostMapping("/space/{spaceName}/folder/{folderName}")
+
+    @PostMapping("/space/{spaceName}/folder/{folderName}/file")
     public Item createNewFile(@RequestParam("file") MultipartFile file,
                               @PathVariable String spaceName,
                               @PathVariable String folderName,
