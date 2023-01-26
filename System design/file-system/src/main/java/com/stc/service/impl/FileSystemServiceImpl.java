@@ -3,10 +3,13 @@ package com.stc.service.impl;
 import com.stc.advice.error.ItemAlreadyExistsException;
 import com.stc.advice.error.ItemNotFoundException;
 import com.stc.dom.*;
+import com.stc.entity.FileEntity;
 import com.stc.entity.ItemEntity;
 import com.stc.entity.PermissionGroupEntity;
+import com.stc.mapper.FileMapper;
 import com.stc.mapper.ItemMapper;
 import com.stc.mapper.PermissionGroupMapper;
+import com.stc.repo.FileRepo;
 import com.stc.repo.ItemRepository;
 import com.stc.service.AuthService;
 import com.stc.service.FileSystemService;
@@ -32,6 +35,10 @@ public class FileSystemServiceImpl implements FileSystemService {
     private final ItemMapper itemMapper;
 
     private final PermissionGroupMapper permissionGroupMapper;
+
+    private final FileRepo fileRepo;
+
+    private final FileMapper fileMapper;
 
     private final AuthService authService;
 
@@ -93,6 +100,10 @@ public class FileSystemServiceImpl implements FileSystemService {
         final Item space = itemMapper.fromSpaceEntity(spaceEntity, permissionGroup);
 
         final Item folder = itemMapper.fromFolderEntity(folderEntity, space);
+
+        final FileEntity fileEntity = fileMapper.toEntity(fileItem);
+
+        fileRepo.save(fileEntity);
 
         return itemMapper.fromFileEntity(savedFileMetaData, folder);
     }
