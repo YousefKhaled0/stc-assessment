@@ -88,6 +88,11 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 }
 ```
 
+| Header | Type     | Description                       | example
+| :-------- | :------- | :-------------------------------- | :--------------
+| `user`      | `string` | **Required**. user email for auth | edit@stc.com |
+
+
 ### Sample response
 ```json
 {
@@ -118,10 +123,6 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 }
 ```
 
-| Header | Type     | Description                       | example
-| :-------- | :------- | :-------------------------------- | :--------------
-| `user`      | `string` | **Required**. user email for auth | edit@stc.com |
-
 #### Notes
 1- Any field other than the folder name will Igonred.
 
@@ -138,6 +139,10 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Sample request
 
 Request is multipart form with file as key.
+
+| Header | Type     | Description                       | example
+| :-------- | :------- | :-------------------------------- | :--------------
+| `user`      | `string` | **Required**. user email for auth | edit@stc.com |
 
 ### Sample response
 ```json
@@ -173,7 +178,3 @@ Request is multipart form with file as key.
     }
 }
 ```
-
-| Header | Type     | Description                       | example
-| :-------- | :------- | :-------------------------------- | :--------------
-| `user`      | `string` | **Required**. user email for auth | edit@stc.com |
