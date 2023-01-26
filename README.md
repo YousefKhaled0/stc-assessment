@@ -118,9 +118,9 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 }
 ```
 
-| Header | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `user`      | `string` | **Required**. user email for auth |
+| Header | Type     | Description                       | example
+| :-------- | :------- | :-------------------------------- | :--------------
+| `user`      | `string` | **Required**. user email for auth | edit@stc.com |
 
 #### Notes
 1- Any field other than the folder name will Igonred.
