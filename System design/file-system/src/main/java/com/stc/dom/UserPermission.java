@@ -1,5 +1,6 @@
 package com.stc.dom;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -11,12 +12,12 @@ import java.util.UUID;
 @Builder
 @Data
 @ToString
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserPermission {
 
     private UUID id;
 
     @Email
-    @NotNull
     private String email;
 
     @NotNull

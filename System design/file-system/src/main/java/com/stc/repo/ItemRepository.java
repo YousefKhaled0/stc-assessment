@@ -9,4 +9,6 @@ import java.util.UUID;
 public interface ItemRepository extends CrudRepository<ItemEntity, UUID> {
 
     Optional<ItemEntity> findByNameAndType(String name, String type);
+
+    Optional<ItemEntity> findByNameAndTypeAndParent(String name, String type, ItemEntity parent);
 }
