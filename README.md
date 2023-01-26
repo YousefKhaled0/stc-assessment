@@ -138,7 +138,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 
 ### Sample request
 
-Request is multipart form with file as key.
+Request is multipart form with "file" as the key.
 
 | Header | Type     | Description                       | example
 | :-------- | :------- | :-------------------------------- | :--------------
