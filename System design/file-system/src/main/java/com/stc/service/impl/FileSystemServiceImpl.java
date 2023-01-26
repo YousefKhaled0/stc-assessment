@@ -82,7 +82,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final PermissionGroup permissionGroup = authService.authEditUser(user, spaceEntity);
 
-        final ItemEntity folderEntity = getItem(spaceName, ItemType.FOLDER, spaceEntity);
+        final ItemEntity folderEntity = getItem(folderName, ItemType.FOLDER, spaceEntity);
 
         final ItemEntity fileMetaData = itemMapper.toFileEntity(fileItem, folderEntity);
 
