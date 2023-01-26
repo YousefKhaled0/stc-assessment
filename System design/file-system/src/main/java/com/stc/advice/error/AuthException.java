@@ -1,4 +1,4 @@
-package com.stc.dom.error;
+package com.stc.advice.error;
 
 public class AuthException extends RuntimeException {
 }

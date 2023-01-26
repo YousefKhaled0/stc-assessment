@@ -2,7 +2,7 @@ package com.stc.service.impl;
 
 import com.stc.dom.Permission;
 import com.stc.dom.PermissionGroup;
-import com.stc.dom.error.AuthException;
+import com.stc.advice.error.AuthException;
 import com.stc.service.AuthService;
 import org.springframework.stereotype.Service;
 

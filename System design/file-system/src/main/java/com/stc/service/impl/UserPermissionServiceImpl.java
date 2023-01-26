@@ -2,7 +2,7 @@ package com.stc.service.impl;
 
 import com.stc.dom.PermissionGroup;
 import com.stc.dom.UserPermission;
-import com.stc.dom.error.PermissionGroupNotFoundException;
+import com.stc.advice.error.PermissionGroupNotFoundException;
 import com.stc.entity.PermissionGroupEntity;
 import com.stc.entity.UserPermissionEntity;
 import com.stc.mapper.UserPermissionMapper;

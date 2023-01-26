@@ -7,7 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface UserPermissionMapper {
+public interface
+UserPermissionMapper {
 
     @Mapping(target = "id", expression = "java(null)")
     @Mapping(target = "permissionGroup", expression = "java(permissionGroupEntity)")
