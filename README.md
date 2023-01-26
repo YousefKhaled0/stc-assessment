@@ -15,15 +15,15 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
   GET /swagger-ui/index.html
 ```
 
-### API Reference
+## API Reference
 
-#### Create new space
+### Create new space
 
 ```http
   Post /space
 ```
 
-#### Sample request
+### Sample request
 ```json
   {
   "name": "stc-assessments",
@@ -42,7 +42,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
   }
 }
 ```
-#### Sample response
+### Sample response
 ```json
 {
     "id": "9baafbd7-52ca-43bb-b83c-ca2228c90425",
@@ -76,22 +76,23 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 
 4- No two spaces can have the same name.
 
-#### Create folder
+### Create folder
 
 ```http
   Post /space/{name}/folder
 ```
-#### Sample request
+### Sample request
 ```json
 {
   "name": "backend"
 }
 ```
 
-#### Sample response
+### Sample response
 ```json
+{
     "id": "1d5aed49-5fd8-47cb-aa16-b9e10747e0b9",
-    "name": "stc-assessmentsaa",
+    "name": "backend",
     "type": "FOLDER",
     "parent": {
         "id": "9baafbd7-52ca-43bb-b83c-ca2228c90425",
