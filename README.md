@@ -90,6 +90,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 
 #### Sample response
 ```json
+{
     "id": "1d5aed49-5fd8-47cb-aa16-b9e10747e0b9",
     "name": "stc-assessmentsaa",
     "type": "FOLDER",
