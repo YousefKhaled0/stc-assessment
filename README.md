@@ -92,7 +92,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ```json
 {
     "id": "1d5aed49-5fd8-47cb-aa16-b9e10747e0b9",
-    "name": "stc-assessmentsaa",
+    "name": "backend",
     "type": "FOLDER",
     "parent": {
         "id": "9baafbd7-52ca-43bb-b83c-ca2228c90425",
