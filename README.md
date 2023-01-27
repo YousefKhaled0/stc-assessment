@@ -255,4 +255,4 @@ Install dependencies
   docker-compose up
 ```
 
-visit http://localhost:8080/swagger-ui/index.html to check if the server is running.
+Visit http://localhost:8080/swagger-ui/index.html to check if the server is running.
