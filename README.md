@@ -20,7 +20,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create new space
 
 ```http
-  Post /space
+  Post /item/space
 ```
 
 ### Sample request
