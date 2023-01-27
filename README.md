@@ -101,19 +101,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
     "type": "FOLDER",
     "group": {
         "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
-        "groupName": "admins",
-        "users": [
-            {
-                "id": "dea7d130-d707-4a80-8b3a-6f388bd665d7",
-                "email": "edit@stc.com",
-                "permission": "EDIT"
-            },
-            {
-                "id": "3286e151-3cbe-4152-ae10-f83dfc6aa940",
-                "email": "view@stc.com",
-                "permission": "VIEW"
-            }
-        ]
+        "groupName": "admins"
     },
     "parent": {
         "id": "242cbd52-144d-46e1-849a-c4646d95f13e",
@@ -165,19 +153,7 @@ Request is multipart form with "file" as the key.
     "type": "FILE",
     "group": {
         "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
-        "groupName": "admins",
-        "users": [
-            {
-                "id": "dea7d130-d707-4a80-8b3a-6f388bd665d7",
-                "email": "edit@stc.com",
-                "permission": "EDIT"
-            },
-            {
-                "id": "3286e151-3cbe-4152-ae10-f83dfc6aa940",
-                "email": "view@stc.com",
-                "permission": "VIEW"
-            }
-        ]
+        "groupName": "admins"
     },
     "parent": {
         "id": "eca63d15-1fc8-4b16-84e3-66d7b3bbd53b",
