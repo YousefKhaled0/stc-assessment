@@ -177,7 +177,7 @@ Request is multipart form with "file" as the key.
 ### Download file
 
 ```http
-  Get /file/{fileItemId}
+  Get /file/{fileItemId}/download
 ```
 
 | Header | Type     | Description                       | example
