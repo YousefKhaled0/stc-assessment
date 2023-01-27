@@ -174,6 +174,17 @@ Request is multipart form with "file" as the key.
 ```
 
 
+### Download file
+
+```http
+  Get /file/{fileItemId}
+```
+
+| Header | Type     | Description                       | example
+| :-------- | :------- | :-------------------------------- | :--------------
+| `user`      | `string` | **Required**. user email for auth | view@stc.com |
+
+
 ### Run Locally
 
 Clone the project
