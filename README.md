@@ -20,7 +20,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create new space
 
 ```http
-  Post /space
+  Post /item/space
 ```
 
 ### Sample request
@@ -67,7 +67,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create folder
 
 ```http
-  Post /parent/{parentId}/folder
+  Post /item/{itemId}/folder
 ```
 ### Sample request
 ```json
@@ -122,7 +122,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Upload file
 
 ```http
-  Post /parent/{parentId}/file
+  Post /item/{itemId}/file
 ```
 
 ### Sample request
