@@ -15,4 +15,6 @@ public interface FileSystemService {
     Item createNewFile(FileItem fileItem, UUID parentId, String user);
 
     byte[] downloadFile(UUID fileId, String user);
+
+    Item getFileMetaData(UUID fileId, String user);
 }

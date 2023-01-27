@@ -62,7 +62,7 @@ public class FileSystemServiceImpl implements FileSystemService {
     }
 
     @Override
-    public Item createNewFolder(FolderItem item, UUID parentId, String user) {
+    public Item createNewFolder(final FolderItem item, final UUID parentId, final String user) {
 
         final ItemEntity parentItem = getParentItem(parentId);
 
@@ -113,6 +113,11 @@ public class FileSystemServiceImpl implements FileSystemService {
         }
 
         return fileEntityOptional.get().getContent();
+    }
+
+    @Override
+    public Item getFileMetaData(final UUID fileId, final String user) {
+        return null;
     }
 
     private void checkItemAlreadyExists(final String name, final ItemType type, final ItemEntity parent) {

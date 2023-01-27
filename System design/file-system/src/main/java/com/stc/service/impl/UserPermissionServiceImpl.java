@@ -51,7 +51,7 @@ public class UserPermissionServiceImpl implements UserPermissionService {
     }
 
     @Override
-    public List<UserPermission> getUsersFromGroup(PermissionGroup permissionGroup) {
+    public List<UserPermission> getUsersFromGroup(final PermissionGroup permissionGroup) {
 
         final PermissionGroupEntity permissionGroupEntity = permissionGroupRepository.findById(permissionGroup.getId())
                 .orElseThrow(PermissionGroupNotFoundException::new);

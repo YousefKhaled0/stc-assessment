@@ -51,9 +51,18 @@ public class FileSystemController {
     }
 
     @GetMapping("/file/{fileId}")
+    public Item getFileMetaData(@PathVariable final UUID fileId,
+                                @RequestHeader(name = "user", required = false) final String user
+    ) {
+
+
+        return fileSystemService.getFileMetaData(fileId , user);
+    }
+
+    @GetMapping("/file/{fileId}/download")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable final UUID fileId,
                                                           @RequestHeader(name = "user", required = false) final String user
-    ) throws IOException {
+    ) {
 
 
         final byte[] content = fileSystemService.downloadFile(fileId, user);

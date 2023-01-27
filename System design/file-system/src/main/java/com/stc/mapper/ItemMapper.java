@@ -17,9 +17,6 @@ public interface ItemMapper {
     @Mapping(target = "type", expression = "java(ItemType.SPACE.name())")
     ItemEntity toSpaceEntity(Item item, PermissionGroupEntity permissionGroupEntity);
 
-    @Mapping(target = "id", expression = "java(itemEntity.getId())")
-    Item fromEntity(ItemEntity itemEntity);
-
     @Mapping(target = "id", expression = "java(null)")
     @Mapping(target = "group", expression = "java(parent.getGroup())")
     @Mapping(target = "type", expression = "java(ItemType.FOLDER.name())")
@@ -36,4 +33,6 @@ public interface ItemMapper {
     @Mapping(target = "parent", expression = "java(parent)")
     @Mapping(target = "items", expression = "java(null)")
     ItemEntity toFileEntity(FileItem item, ItemEntity parent);
+
+    Item fromEntity(ItemEntity itemEntity);
 }

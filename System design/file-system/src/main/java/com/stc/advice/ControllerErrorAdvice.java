@@ -18,7 +18,7 @@ import java.util.Map;
 public class ControllerErrorAdvice {
 
     @ExceptionHandler(AuthException.class)
-    public ResponseEntity<Object> handleAuthException(AuthException ex, WebRequest request) {
+    public ResponseEntity<Object> handleAuthException() {
 
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
@@ -27,10 +27,10 @@ public class ControllerErrorAdvice {
             ItemAlreadyExistsException.class,
             MultipartException.class
     })
-    public ResponseEntity<Object> handleBadRequest(Exception ex, WebRequest request) {
+    public ResponseEntity<Object> handleBadRequest(final Exception ex) {
 
 
-        Map<String, Object> body = new LinkedHashMap<>();
+        final Map<String, Object> body = new LinkedHashMap<>();
         body.put("message", ex.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
@@ -40,10 +40,10 @@ public class ControllerErrorAdvice {
             ItemNotFoundException.class,
             PermissionGroupNotFoundException.class
     })
-    public ResponseEntity<Object> handleNotFound(Exception ex, WebRequest request) {
+    public ResponseEntity<Object> handleNotFound(final Exception ex) {
 
 
-        Map<String, Object> body = new LinkedHashMap<>();
+        final Map<String, Object> body = new LinkedHashMap<>();
         body.put("message", ex.getMessage());
 
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
