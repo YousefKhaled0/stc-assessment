@@ -117,7 +117,12 @@ public class FileSystemServiceImpl implements FileSystemService {
 
     @Override
     public Item getFileMetaData(final UUID fileId, final String user) {
-        return null;
+
+        final ItemEntity fileEntity = getFile(fileId);
+
+        authService.authViewUser(user, fileEntity);
+
+        return itemMapper.fromEntity(fileEntity);
     }
 
     private void checkItemAlreadyExists(final String name, final ItemType type, final ItemEntity parent) {
