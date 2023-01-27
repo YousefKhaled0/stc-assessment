@@ -50,19 +50,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
     "type": "SPACE",
     "group": {
         "id": "5505291d-5a78-47a6-8bcd-a0d465d4d9d8",
-        "groupName": "admins",
-        "users": [
-            {
-                "id": "9f823e3c-5c82-46cf-8ece-0c00ae23d560",
-                "email": "edit@stc.com",
-                "permission": "EDIT"
-            },
-            {
-                "id": "aeaea104-69b5-495b-8672-d2d1d35f4a73",
-                "email": "view@stc.com",
-                "permission": "VIEW"
-            }
-        ]
+        "groupName": "admins"
     }
 }
 ```
@@ -105,7 +93,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
     },
     "parent": {
         "id": "242cbd52-144d-46e1-849a-c4646d95f13e",
-        "name": "stc-assessments",
+        "name": "stc-assessments-folder1",
         "type": "FOLDER",
         "group": {
             "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
