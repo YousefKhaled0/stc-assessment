@@ -122,7 +122,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Upload file
 
 ```http
-  Post /parent/{parentId}/file
+  Post /item/{itemId}/file
 ```
 
 ### Sample request
