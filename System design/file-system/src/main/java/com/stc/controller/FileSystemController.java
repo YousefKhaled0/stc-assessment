@@ -21,13 +21,13 @@ public class FileSystemController {
 
     private final FileSystemService fileSystemService;
 
-    @PostMapping("/item/space")
+    @PostMapping("/items/spaces")
     public Item createNewSpace(@RequestBody @Valid final Item item) {
 
         return fileSystemService.createNewSpace(item);
     }
 
-    @PostMapping("/item/{itemId}/folder")
+    @PostMapping("/items/{itemId}/folders")
     public Item createNewSpace(@RequestBody @Valid final FolderItem folderItem,
                                @PathVariable final UUID itemId,
                                @RequestHeader(name = "user", required = false) final String user
@@ -37,7 +37,7 @@ public class FileSystemController {
     }
 
 
-    @PostMapping("/item/{itemId}/file")
+    @PostMapping("/items/{itemId}/files")
     public Item createNewFile(@RequestParam("file") final MultipartFile file,
                               @PathVariable final UUID itemId,
                               @RequestHeader(name = "user", required = false) final String user
@@ -50,7 +50,7 @@ public class FileSystemController {
         return fileSystemService.createNewFile(fileItem, itemId, user);
     }
 
-    @GetMapping("/file/{fileId}")
+    @GetMapping("/files/{fileId}")
     public Item getFileMetaData(@PathVariable final UUID fileId,
                                 @RequestHeader(name = "user", required = false) final String user
     ) {
@@ -59,7 +59,7 @@ public class FileSystemController {
         return fileSystemService.getFileMetaData(fileId , user);
     }
 
-    @GetMapping("/file/{fileId}/download")
+    @GetMapping("/files/{fileId}/download")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable final UUID fileId,
                                                           @RequestHeader(name = "user", required = false) final String user
     ) {
