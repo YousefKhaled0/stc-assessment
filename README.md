@@ -227,7 +227,7 @@ Request is multipart form with "file" as the key.
 ### Download file
 
 ```http
-  Get /files/{fileItemId}/download
+  Get /files/{fileId}/download
 ```
 
 | Header | Type     | Description                       | example
