@@ -90,11 +90,26 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final ItemEntity savedFileMetaData = itemRepository.save(fileMetaData);
 
-        final FileEntity fileEntity = fileMapper.toEntity(fileItem);
+        final FileEntity fileEntity = fileMapper.toEntity(fileItem, savedFileMetaData);
 
         fileRepo.save(fileEntity);
 
         return itemMapper.fromEntity(savedFileMetaData);
+    }
+
+    @Override
+    public byte[] downloadFile(final UUID fileId) {
+
+        final ItemEntity fileEntity = getFile(fileId);
+
+        final Optional<FileEntity> fileEntityOptional = fileRepo.findByItem(fileEntity);
+
+        if (!fileEntityOptional.isPresent()) {
+
+            throw new ItemNotFoundException();
+        }
+
+        return fileEntityOptional.get().getContent();
     }
 
     private void checkItemAlreadyExists(final String name, final ItemType type, final ItemEntity parent) {
@@ -105,6 +120,25 @@ public class FileSystemServiceImpl implements FileSystemService {
 
             throw new ItemAlreadyExistsException();
         }
+    }
+
+    private ItemEntity getFile(final UUID fileId) {
+
+        final Optional<ItemEntity> itemEntityOptional = itemRepository.findById(fileId);
+
+        if (!itemEntityOptional.isPresent()) {
+
+            throw new ItemNotFoundException();
+        }
+
+        final ItemEntity itemEntity = itemEntityOptional.get();
+
+        if (!Objects.equals(itemEntity.getType(), ItemType.FILE.name())) {
+
+            throw new ItemNotFoundException();
+        }
+
+        return itemEntity;
     }
 
     private ItemEntity getParentItem(final UUID parentId) {

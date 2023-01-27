@@ -13,4 +13,6 @@ public interface FileSystemService {
     Item createNewFolder(FolderItem item, UUID parentId, String user);
 
     Item createNewFile(FileItem fileItem, UUID parentId, String user);
+
+    byte[] downloadFile(UUID fileId);
 }

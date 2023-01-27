@@ -5,6 +5,9 @@ import com.stc.dom.FolderItem;
 import com.stc.dom.Item;
 import com.stc.service.FileSystemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,5 +48,20 @@ public class FileSystemController {
                 .content(file.getBytes()).build();
 
         return fileSystemService.createNewFile(fileItem, parentId, user);
+    }
+
+    @GetMapping("/file/{fileId}")
+    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable final UUID fileId,
+                                                          @RequestHeader(name = "user", required = false) final String user
+    ) throws IOException {
+
+
+        final byte[] content = fileSystemService.downloadFile(fileId);
+
+        final ByteArrayResource resource = new ByteArrayResource(content);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
 }
