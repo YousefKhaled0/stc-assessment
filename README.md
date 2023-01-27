@@ -172,3 +172,26 @@ Request is multipart form with "file" as the key.
     }
 }
 ```
+
+
+### Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/YousefKhaled0/stc-assessment.git
+```
+
+Go to the project directory
+
+```bash
+  cd 'stc-assessment\System design\file-system\'
+```
+
+Install dependencies
+
+```bash
+  docker-compose up
+```
+
+visit http://localhost:8080/swagger-ui/index.html to check if the server is running.
