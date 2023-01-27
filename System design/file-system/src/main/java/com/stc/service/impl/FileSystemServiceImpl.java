@@ -98,9 +98,12 @@ public class FileSystemServiceImpl implements FileSystemService {
     }
 
     @Override
-    public byte[] downloadFile(final UUID fileId) {
+    public byte[] downloadFile(final UUID fileId, final String user) {
 
         final ItemEntity fileEntity = getFile(fileId);
+
+        // to easily download file from the browser comment this. otherwise use postman.
+        authService.authViewUser(user, fileEntity);
 
         final Optional<FileEntity> fileEntityOptional = fileRepo.findByItem(fileEntity);
 

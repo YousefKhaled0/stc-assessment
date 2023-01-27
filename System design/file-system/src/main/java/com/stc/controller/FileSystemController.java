@@ -56,7 +56,7 @@ public class FileSystemController {
     ) throws IOException {
 
 
-        final byte[] content = fileSystemService.downloadFile(fileId);
+        final byte[] content = fileSystemService.downloadFile(fileId, user);
 
         final ByteArrayResource resource = new ByteArrayResource(content);
 
