@@ -172,7 +172,57 @@ Request is multipart form with "file" as the key.
     }
 }
 ```
+### Get file metadata
 
+```http
+  Post /file/{fileId}
+```
+
+### Sample request
+
+| Header | Type     | Description                       | example
+| :-------- | :------- | :-------------------------------- | :--------------
+| `user`      | `string` | **Required**. user email for auth | view@stc.com |
+
+### Sample response
+```json
+{
+    "id": "56793332-a4cf-4196-b24f-777824077648",
+    "name": "chrome_100_percent.pak",
+    "type": "FILE",
+    "group": {
+        "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
+        "groupName": "admins"
+    },
+    "parent": {
+        "id": "ee70a114-8633-425a-b767-4a5b7b25951d",
+        "name": "stc-assessments-folder-2",
+        "type": "FOLDER",
+        "group": {
+            "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
+            "groupName": "admins"
+        },
+        "parent": {
+            "id": "626f427e-a158-41b1-9392-75ccc8cb869f",
+            "name": "stc-assessments-folder-1",
+            "type": "FOLDER",
+            "group": {
+                "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
+                "groupName": "admins"
+            },
+            "parent": {
+                "id": "7d75724d-d975-496f-bcde-934d3e701783",
+                "name": "stc-assessments",
+                "type": "SPACE",
+                "group": {
+                    "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
+                    "groupName": "admins"
+                }
+            }
+        }
+    }
+}
+```
 
 ### Download file
 
