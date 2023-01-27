@@ -30,10 +30,8 @@ public class AuthServiceImpl implements AuthService {
         final PermissionGroup permissionGroup = permissionGroupMapper.fromEntity(permissionGroupEntity);
 
         final List<UserPermission> usersFromGroup = userPermissionService.getUsersFromGroup(permissionGroup);
-        permissionGroup.setUsers(usersFromGroup);
 
-        final boolean auth = permissionGroup.getUsers()
-                .stream()
+        final boolean auth = usersFromGroup.stream()
                 .anyMatch(userPermission -> userPermission.getEmail().equals(user) &&
                         userPermission.getPermission().equals(Permission.EDIT));
 
@@ -51,10 +49,8 @@ public class AuthServiceImpl implements AuthService {
         final PermissionGroup permissionGroup = permissionGroupMapper.fromEntity(permissionGroupEntity);
 
         final List<UserPermission> usersFromGroup = userPermissionService.getUsersFromGroup(permissionGroup);
-        permissionGroup.setUsers(usersFromGroup);
 
-        final boolean auth = permissionGroup.getUsers()
-                .stream()
+        final boolean auth = usersFromGroup.stream()
                 .anyMatch(userPermission ->
                         userPermission.getEmail().equals(user) &&
                                 (userPermission.getPermission().equals(Permission.EDIT) ||

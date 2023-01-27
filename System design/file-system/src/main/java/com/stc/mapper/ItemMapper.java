@@ -18,8 +18,7 @@ public interface ItemMapper {
     ItemEntity toSpaceEntity(Item item, PermissionGroupEntity permissionGroupEntity);
 
     @Mapping(target = "id", expression = "java(itemEntity.getId())")
-    @Mapping(target = "group", expression = "java(permissionGroup)")
-    Item fromEntity(ItemEntity itemEntity, PermissionGroup permissionGroup);
+    Item fromEntity(ItemEntity itemEntity);
 
     @Mapping(target = "id", expression = "java(null)")
     @Mapping(target = "group", expression = "java(parent.getGroup())")

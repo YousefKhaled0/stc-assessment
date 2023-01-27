@@ -18,11 +18,9 @@ import com.stc.service.UserPermissionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,11 +49,8 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final PermissionGroup permissionGroup = permissionGroupService.createOrGetGroup(item.getGroup());
 
-        final List<UserPermission> userPermissions = item.getGroup().getUsers().stream()
-                .map(userPermission -> userPermissionService.addUserToGroup(permissionGroup, userPermission))
-                .collect(Collectors.toList());
-
-        permissionGroup.setUsers(userPermissions);
+        item.getGroup().getUsers()
+                .forEach(userPermission -> userPermissionService.addUserToGroup(permissionGroup, userPermission));
 
         final PermissionGroupEntity permissionGroupEntity = permissionGroupMapper.toEntity(permissionGroup);
 
@@ -63,7 +58,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final ItemEntity savedItemEntity = itemRepository.save(itemEntity);
 
-        return itemMapper.fromEntity(savedItemEntity, permissionGroup);
+        return itemMapper.fromEntity(savedItemEntity);
     }
 
     @Override
@@ -71,7 +66,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final ItemEntity parentItem = getParentItem(parentId);
 
-        final PermissionGroup permissionGroup = authService.authEditUser(user, parentItem);
+        authService.authEditUser(user, parentItem);
 
         checkItemAlreadyExists(item.getName(), ItemType.FOLDER, parentItem);
 
@@ -79,7 +74,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final ItemEntity savedItemEntity = itemRepository.save(itemEntity);
 
-        return itemMapper.fromEntity(savedItemEntity, permissionGroup);
+        return itemMapper.fromEntity(savedItemEntity);
     }
 
     @Override
@@ -87,7 +82,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final ItemEntity parentItem = getParentItem(parentId);
 
-        final PermissionGroup permissionGroup = authService.authEditUser(user, parentItem);
+        authService.authEditUser(user, parentItem);
 
         final ItemEntity fileMetaData = itemMapper.toFileEntity(fileItem, parentItem);
 
@@ -99,7 +94,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         fileRepo.save(fileEntity);
 
-        return itemMapper.fromEntity(savedFileMetaData, permissionGroup);
+        return itemMapper.fromEntity(savedFileMetaData);
     }
 
     private void checkItemAlreadyExists(final String name, final ItemType type, final ItemEntity parent) {
