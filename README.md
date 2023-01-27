@@ -67,7 +67,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create folder
 
 ```http
-  Post /parent/{parentId}/folder
+  Post /item/{itemId}/folder
 ```
 ### Sample request
 ```json
