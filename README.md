@@ -20,7 +20,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create new space
 
 ```http
-  Post /item/space
+  Post /items/spaces
 ```
 
 ### Sample request
@@ -67,7 +67,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create folder
 
 ```http
-  Post /item/{itemId}/folder
+  Post /items/{itemId}/folders
 ```
 ### Sample request
 ```json
@@ -122,7 +122,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Upload file
 
 ```http
-  Post /item/{itemId}/file
+  Post /items/{itemId}/files
 ```
 
 ### Sample request
@@ -175,7 +175,7 @@ Request is multipart form with "file" as the key.
 ### Get file metadata
 
 ```http
-  Post /file/{fileId}
+  Post /files/{fileId}
 ```
 
 ### Sample request
@@ -227,7 +227,7 @@ Request is multipart form with "file" as the key.
 ### Download file
 
 ```http
-  Get /file/{fileItemId}/download
+  Get /files/{fileItemId}/download
 ```
 
 | Header | Type     | Description                       | example
