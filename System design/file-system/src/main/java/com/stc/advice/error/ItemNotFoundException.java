@@ -4,6 +4,6 @@ public class ItemNotFoundException extends RuntimeException {
 
     public ItemNotFoundException() {
 
-        super("Space Not Found");
+        super("Item Not Found");
     }
 }

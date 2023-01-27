@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,27 +24,26 @@ public class FileSystemController {
         return fileSystemService.createNewSpace(item);
     }
 
-    @PostMapping("/space/{spaceName}/folder")
+    @PostMapping("/parent/{parentId}/folder")
     public Item createNewSpace(@RequestBody @Valid final FolderItem folderItem,
-                               @PathVariable String spaceName,
-                               @RequestHeader(name = "user", required = false) String user
+                               @PathVariable final UUID parentId,
+                               @RequestHeader(name = "user", required = false) final String user
     ) {
 
-        return fileSystemService.createNewFolder(folderItem, spaceName, user);
+        return fileSystemService.createNewFolder(folderItem, parentId, user);
     }
 
 
-    @PostMapping("/space/{spaceName}/folder/{folderName}/file")
-    public Item createNewFile(@RequestParam("file") MultipartFile file,
-                              @PathVariable String spaceName,
-                              @PathVariable String folderName,
-                              @RequestHeader(name = "user", required = false) String user
+    @PostMapping("/parent/{parentId}/file")
+    public Item createNewFile(@RequestParam("file") final MultipartFile file,
+                              @PathVariable final UUID parentId,
+                              @RequestHeader(name = "user", required = false) final String user
     ) throws IOException {
 
         final FileItem fileItem = FileItem.builder()
                 .name(file.getOriginalFilename())
                 .content(file.getBytes()).build();
 
-        return fileSystemService.createNewFile(fileItem, spaceName, folderName, user);
+        return fileSystemService.createNewFile(fileItem, parentId, user);
     }
 }

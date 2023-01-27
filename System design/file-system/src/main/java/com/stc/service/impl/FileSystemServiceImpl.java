@@ -19,7 +19,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,51 +63,43 @@ public class FileSystemServiceImpl implements FileSystemService {
 
         final ItemEntity savedItemEntity = itemRepository.save(itemEntity);
 
-        return itemMapper.fromSpaceEntity(savedItemEntity, permissionGroup);
+        return itemMapper.fromEntity(savedItemEntity, permissionGroup);
     }
 
     @Override
-    public Item createNewFolder(FolderItem item, String spaceName, String user) {
+    public Item createNewFolder(FolderItem item, UUID parentId, String user) {
 
-        final ItemEntity spaceEntity = getItem(spaceName, ItemType.SPACE, null);
+        final ItemEntity parentItem = getParentItem(parentId);
 
-        final PermissionGroup permissionGroup = authService.authEditUser(user, spaceEntity);
+        final PermissionGroup permissionGroup = authService.authEditUser(user, parentItem);
 
-        checkItemAlreadyExists(item.getName(), ItemType.FOLDER, spaceEntity);
+        checkItemAlreadyExists(item.getName(), ItemType.FOLDER, parentItem);
 
-        final ItemEntity itemEntity = itemMapper.toFolderEntity(item, spaceEntity);
+        final ItemEntity itemEntity = itemMapper.toFolderEntity(item, parentItem);
 
         final ItemEntity savedItemEntity = itemRepository.save(itemEntity);
 
-        final Item parent = itemMapper.fromSpaceEntity(spaceEntity, permissionGroup);
-
-        return itemMapper.fromFolderEntity(savedItemEntity, parent);
+        return itemMapper.fromEntity(savedItemEntity, permissionGroup);
     }
 
     @Override
-    public Item createNewFile(final FileItem fileItem, final String spaceName, final String folderName, final String user) {
+    public Item createNewFile(final FileItem fileItem, final UUID parentId, final String user) {
 
-        final ItemEntity spaceEntity = getItem(spaceName, ItemType.SPACE, null);
+        final ItemEntity parentItem = getParentItem(parentId);
 
-        final PermissionGroup permissionGroup = authService.authEditUser(user, spaceEntity);
+        final PermissionGroup permissionGroup = authService.authEditUser(user, parentItem);
 
-        final ItemEntity folderEntity = getItem(folderName, ItemType.FOLDER, spaceEntity);
+        final ItemEntity fileMetaData = itemMapper.toFileEntity(fileItem, parentItem);
 
-        final ItemEntity fileMetaData = itemMapper.toFileEntity(fileItem, folderEntity);
-
-        checkItemAlreadyExists(fileItem.getName(), ItemType.FILE, folderEntity);
+        checkItemAlreadyExists(fileItem.getName(), ItemType.FILE, parentItem);
 
         final ItemEntity savedFileMetaData = itemRepository.save(fileMetaData);
-
-        final Item space = itemMapper.fromSpaceEntity(spaceEntity, permissionGroup);
-
-        final Item folder = itemMapper.fromFolderEntity(folderEntity, space);
 
         final FileEntity fileEntity = fileMapper.toEntity(fileItem);
 
         fileRepo.save(fileEntity);
 
-        return itemMapper.fromFileEntity(savedFileMetaData, folder);
+        return itemMapper.fromEntity(savedFileMetaData, permissionGroup);
     }
 
     private void checkItemAlreadyExists(final String name, final ItemType type, final ItemEntity parent) {
@@ -118,15 +112,23 @@ public class FileSystemServiceImpl implements FileSystemService {
         }
     }
 
-    private ItemEntity getItem(final String name, final ItemType type, final ItemEntity parent) {
+    private ItemEntity getParentItem(final UUID parentId) {
 
-        final Optional<ItemEntity> itemEntityOptional = itemRepository.findByNameAndTypeAndParent(name, type.name(), parent);
+        final Optional<ItemEntity> itemEntityOptional = itemRepository.findById(parentId);
 
         if (!itemEntityOptional.isPresent()) {
 
             throw new ItemNotFoundException();
         }
 
-        return itemEntityOptional.get();
+        final ItemEntity itemEntity = itemEntityOptional.get();
+
+        if (!Objects.equals(itemEntity.getType(), ItemType.FOLDER.name()) &&
+                !Objects.equals(itemEntity.getType(), ItemType.SPACE.name())) {
+
+            throw new ItemNotFoundException();
+        }
+
+        return itemEntity;
     }
 }

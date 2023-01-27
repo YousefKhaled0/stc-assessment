@@ -79,7 +79,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Create folder
 
 ```http
-  Post /space/{spaceName}/folder
+  Post /parent/{parentId}/folder
 ```
 ### Sample request
 ```json
@@ -96,29 +96,42 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Sample response
 ```json
 {
-    "id": "1d5aed49-5fd8-47cb-aa16-b9e10747e0b9",
-    "name": "backend",
+    "id": "25d0309f-1e7f-48e4-b06c-60bcd84b498b",
+    "name": "stc-assessments-folder2",
     "type": "FOLDER",
+    "group": {
+        "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+        "groupName": "admins",
+        "users": [
+            {
+                "id": "dea7d130-d707-4a80-8b3a-6f388bd665d7",
+                "email": "edit@stc.com",
+                "permission": "EDIT"
+            },
+            {
+                "id": "3286e151-3cbe-4152-ae10-f83dfc6aa940",
+                "email": "view@stc.com",
+                "permission": "VIEW"
+            }
+        ]
+    },
     "parent": {
-        "id": "9baafbd7-52ca-43bb-b83c-ca2228c90425",
+        "id": "242cbd52-144d-46e1-849a-c4646d95f13e",
         "name": "stc-assessments",
-        "type": "SPACE",
+        "type": "FOLDER",
         "group": {
-            "id": "5505291d-5a78-47a6-8bcd-a0d465d4d9d8",
-            "groupName": "admins",
-            "users": [
-                {
-                    "id": "9f823e3c-5c82-46cf-8ece-0c00ae23d560",
-                    "email": "edit@stc.com",
-                    "permission": "EDIT"
-                },
-                {
-                    "id": "aeaea104-69b5-495b-8672-d2d1d35f4a73",
-                    "email": "view@stc.com",
-                    "permission": "VIEW"
-                }
-            ]
+            "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+            "groupName": "admins"
         },
+        "parent": {
+            "id": "107bbb6e-c396-4881-a485-dbf16aa69678",
+            "name": "stc-assessments",
+            "type": "SPACE",
+            "group": {
+                "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+                "groupName": "admins"
+            }
+        }
     }
 }
 ```
@@ -133,7 +146,7 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Upload file
 
 ```http
-  Post /space/{spaceName}/folder/{folderName}/file
+  Post /parent/{parentId}/file
 ```
 
 ### Sample request
@@ -147,34 +160,51 @@ Request is multipart form with "file" as the key.
 ### Sample response
 ```json
 {
-    "id": "8e14fb8b-c6af-4bae-b16b-9b6024c997cd",
-    "name": "Squirrel-UpdateSelf.log",
+    "id": "74cd5828-516c-4e4c-aba1-d30e011a34c7",
+    "name": "v8_context_snapshot.bin",
     "type": "FILE",
-    "parent": {
-        "id": "91de6656-484d-41a0-8309-90c894c1cde8",
-        "name": "aaaaaaaaaaaaa",
-        "type": "FOLDER",
-        "parent": {
-            "id": "b559c651-bc5d-42a4-ab44-6dcab414ad34",
-            "name": "stc-assessments",
-            "type": "SPACE",
-            "group": {
-                "id": "5505291d-5a78-47a6-8bcd-a0d465d4d9d8",
-                "groupName": "admins",
-                "users": [
-                    {
-                        "id": "9f823e3c-5c82-46cf-8ece-0c00ae23d560",
-                        "email": "edit@stc.com",
-                        "permission": "EDIT"
-                    },
-                    {
-                        "id": "aeaea104-69b5-495b-8672-d2d1d35f4a73",
-                        "email": "view@stc.com",
-                        "permission": "VIEW"
-                    }
-                ]
+    "group": {
+        "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+        "groupName": "admins",
+        "users": [
+            {
+                "id": "dea7d130-d707-4a80-8b3a-6f388bd665d7",
+                "email": "edit@stc.com",
+                "permission": "EDIT"
+            },
+            {
+                "id": "3286e151-3cbe-4152-ae10-f83dfc6aa940",
+                "email": "view@stc.com",
+                "permission": "VIEW"
             }
-       }
+        ]
+    },
+    "parent": {
+        "id": "eca63d15-1fc8-4b16-84e3-66d7b3bbd53b",
+        "name": "mySecondfolder",
+        "type": "FOLDER",
+        "group": {
+            "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+            "groupName": "admins"
+        },
+        "parent": {
+            "id": "3afe2ce5-d7e8-4354-9b35-350c415b1396",
+            "name": "myfolder",
+            "type": "FOLDER",
+            "group": {
+                "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+                "groupName": "admins"
+            },
+            "parent": {
+                "id": "4f5a82a7-9ebe-4dd1-829d-437ad5128e2c",
+                "name": "myspace",
+                "type": "SPACE",
+                "group": {
+                    "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+                    "groupName": "admins"
+                }
+            }
+        }
     }
 }
 ```
