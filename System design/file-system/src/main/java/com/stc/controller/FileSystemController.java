@@ -21,25 +21,25 @@ public class FileSystemController {
 
     private final FileSystemService fileSystemService;
 
-    @PostMapping("/space")
+    @PostMapping("/item/space")
     public Item createNewSpace(@RequestBody @Valid final Item item) {
 
         return fileSystemService.createNewSpace(item);
     }
 
-    @PostMapping("/parent/{parentId}/folder")
+    @PostMapping("/item/{itemId}/folder")
     public Item createNewSpace(@RequestBody @Valid final FolderItem folderItem,
-                               @PathVariable final UUID parentId,
+                               @PathVariable final UUID itemId,
                                @RequestHeader(name = "user", required = false) final String user
     ) {
 
-        return fileSystemService.createNewFolder(folderItem, parentId, user);
+        return fileSystemService.createNewFolder(folderItem, itemId, user);
     }
 
 
-    @PostMapping("/parent/{parentId}/file")
+    @PostMapping("/item/{itemId}/file")
     public Item createNewFile(@RequestParam("file") final MultipartFile file,
-                              @PathVariable final UUID parentId,
+                              @PathVariable final UUID itemId,
                               @RequestHeader(name = "user", required = false) final String user
     ) throws IOException {
 
@@ -47,7 +47,7 @@ public class FileSystemController {
                 .name(file.getOriginalFilename())
                 .content(file.getBytes()).build();
 
-        return fileSystemService.createNewFile(fileItem, parentId, user);
+        return fileSystemService.createNewFile(fileItem, itemId, user);
     }
 
     @GetMapping("/file/{fileId}")
