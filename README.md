@@ -45,11 +45,11 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Sample response
 ```json
 {
-    "id": "9baafbd7-52ca-43bb-b83c-ca2228c90425",
+    "id": "7d75724d-d975-496f-bcde-934d3e701783",
     "name": "stc-assessments",
     "type": "SPACE",
     "group": {
-        "id": "5505291d-5a78-47a6-8bcd-a0d465d4d9d8",
+        "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
         "groupName": "admins"
     }
 }
@@ -84,27 +84,27 @@ There's a swagger documentation for the APIs that can be accessed from the brosw
 ### Sample response
 ```json
 {
-    "id": "25d0309f-1e7f-48e4-b06c-60bcd84b498b",
-    "name": "stc-assessments-folder2",
+    "id": "ee70a114-8633-425a-b767-4a5b7b25951d",
+    "name": "stc-assessments-folder-2",
     "type": "FOLDER",
     "group": {
-        "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+        "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
         "groupName": "admins"
     },
     "parent": {
-        "id": "242cbd52-144d-46e1-849a-c4646d95f13e",
-        "name": "stc-assessments-folder1",
+        "id": "626f427e-a158-41b1-9392-75ccc8cb869f",
+        "name": "stc-assessments-folder-1",
         "type": "FOLDER",
         "group": {
-            "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+            "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
             "groupName": "admins"
         },
         "parent": {
-            "id": "107bbb6e-c396-4881-a485-dbf16aa69678",
+            "id": "7d75724d-d975-496f-bcde-934d3e701783",
             "name": "stc-assessments",
             "type": "SPACE",
             "group": {
-                "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+                "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
                 "groupName": "admins"
             }
         }
@@ -136,35 +136,35 @@ Request is multipart form with "file" as the key.
 ### Sample response
 ```json
 {
-    "id": "74cd5828-516c-4e4c-aba1-d30e011a34c7",
-    "name": "v8_context_snapshot.bin",
+    "id": "56793332-a4cf-4196-b24f-777824077648",
+    "name": "chrome_100_percent.pak",
     "type": "FILE",
     "group": {
-        "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+        "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
         "groupName": "admins"
     },
     "parent": {
-        "id": "eca63d15-1fc8-4b16-84e3-66d7b3bbd53b",
-        "name": "mySecondfolder",
+        "id": "ee70a114-8633-425a-b767-4a5b7b25951d",
+        "name": "stc-assessments-folder-2",
         "type": "FOLDER",
         "group": {
-            "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+            "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
             "groupName": "admins"
         },
         "parent": {
-            "id": "3afe2ce5-d7e8-4354-9b35-350c415b1396",
-            "name": "myfolder",
+            "id": "626f427e-a158-41b1-9392-75ccc8cb869f",
+            "name": "stc-assessments-folder-1",
             "type": "FOLDER",
             "group": {
-                "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+                "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
                 "groupName": "admins"
             },
             "parent": {
-                "id": "4f5a82a7-9ebe-4dd1-829d-437ad5128e2c",
-                "name": "myspace",
+                "id": "7d75724d-d975-496f-bcde-934d3e701783",
+                "name": "stc-assessments",
                 "type": "SPACE",
                 "group": {
-                    "id": "769cc161-112d-433a-bc9c-bdc9929cc103",
+                    "id": "5ea119bb-352a-4c00-a32b-bd2742fb3327",
                     "groupName": "admins"
                 }
             }
