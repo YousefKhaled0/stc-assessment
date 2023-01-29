@@ -247,11 +247,6 @@ Go to the project directory
 
 ```bash
   cd 'stc-assessment\System design\file-system\'
-```
-
-Install dependencies
-
-```bash
   docker-compose up
 ```
 
